@@ -59,7 +59,8 @@ public class ClientConnection {
 		try {
 			System.out.println("Getting Ip of other Pc");
 			udpSocket.receive(udpResponse);
-			return udpSocket.getInetAddress().getHostAddress();
+			String remoteIp = udpResponse.getAddress().getHostAddress();
+			return remoteIp;
 
 		} catch (SocketTimeoutException t) {
 			System.out.println("No server on online, making server");
