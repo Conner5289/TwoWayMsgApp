@@ -6,6 +6,8 @@ import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.ServerSocket;
 
+import sun.util.logging.resources.logging;
+
 public class ServerConnection {
 	private ServerSocket serverConnetion;
 
@@ -30,24 +32,25 @@ public class ServerConnection {
 
 	public String updConnection() {
 
-		DatagramSocket udpSocket = null;
 		IpAdderss loaclIp = new IpAdderss();
+		DatagramSocket udpSocket = null;
 		byte[] buffer = new byte[1024];
 		final int PORT = 5291;
-		final String BOARDCAST_IP = "192.168.1.255";
 
 		try {
-			InetAddress boardCastIp = InetAddress.getByName(BOARDCAST_IP);
 			udpSocket = new DatagramSocket(5291);
 
 			System.out.println("Waiting for connection");
 			DatagramPacket udpPacket = new DatagramPacket(buffer, buffer.length);
 
 			udpSocket.receive(udpPacket);
+			InetAddress remoteIp = udpPacket.getAddress();
+
 			System.out.println("Connection made");
 
 			String sendMsg = loaclIp.getLocalIp();
-			DatagramPacket udpSendPacket = new DatagramPacket(sendMsg.getBytes(), sendMsg.length(), boardCastIp, PORT);
+			DatagramPacket udpSendPacket = new DatagramPacket(sendMsg.getBytes(), sendMsg.length(), remoteIp,
+					PORT);
 
 			try {
 				udpSocket.send(udpSendPacket);
@@ -57,8 +60,8 @@ public class ServerConnection {
 				System.out.println("Bad udpPacket send");
 			}
 
-			String remoteIp = udpPacket.getAddress().getHostAddress();
-			return remoteIp;
+			String remoteAddress = remoteIp.getHostAddress();
+			return remoteAddress;
 
 		} catch (Exception e) {
 			e.printStackTrace();
