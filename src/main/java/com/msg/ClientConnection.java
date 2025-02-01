@@ -37,7 +37,6 @@ public class ClientConnection {
 			udpSocket = new DatagramSocket();
 			boardCastIp = InetAddress.getByName(BOARDCAST_IP);
 			udpSocket.setBroadcast(true);
-			udpSocket.setSoTimeout(1000); // Timeout of 5 seconds
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -61,6 +60,7 @@ public class ClientConnection {
 		try {
 			System.out.println("Getting Ip of other Pc");
 			udpSocket.receive(udpResponse);
+			udpSocket.setSoTimeout(5000); // Timeout of 5 seconds
 			return udpSocket.getInetAddress().getHostAddress();
 
 		} catch (SocketTimeoutException t) {

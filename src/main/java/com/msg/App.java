@@ -5,10 +5,10 @@ public class App {
 		ClientConnection client = new ClientConnection();
 		ServerConnection server = new ServerConnection();
 
-		String remoteIp = client.clientUdpConnection();
+		String remoteIp = client.clientUdpConnection(); // sees if there is a server, if non returns null
 
 		if (remoteIp == null) {
-			System.out.println(server.updConnection());
+			System.out.println(server.updConnection()); // Makes a server
 		}
 
 	}
