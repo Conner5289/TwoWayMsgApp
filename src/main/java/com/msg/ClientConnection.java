@@ -5,6 +5,7 @@ import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.Socket;
+import java.net.SocketTimeoutException;
 import java.util.Scanner;
 
 public class ClientConnection {
@@ -36,6 +37,7 @@ public class ClientConnection {
 			udpSocket = new DatagramSocket();
 			boardCastIp = InetAddress.getByName(BOARDCAST_IP);
 			udpSocket.setBroadcast(true);
+			udpSocket.setSoTimeout(1000); // Timeout of 5 seconds
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -53,7 +55,25 @@ public class ClientConnection {
 			System.out.println("Bad udpPacket send");
 		}
 
-		return "Done";
+		byte[] buffer = new byte[1024];
+		DatagramPacket udpResponse = new DatagramPacket(buffer, buffer.length);
+
+		try {
+			System.out.println("Getting Ip of other Pc");
+			udpSocket.receive(udpResponse);
+			return udpSocket.getInetAddress().getHostAddress();
+
+		} catch (SocketTimeoutException t) {
+			System.out.println("No server on online, making server");
+
+			return null;
+
+		} catch (IOException e) {
+			e.printStackTrace();
+			System.out.println("Bad receive");
+			return null;
+		}
+
 	}
 
 }
