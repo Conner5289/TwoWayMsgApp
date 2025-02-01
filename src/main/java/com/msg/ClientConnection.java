@@ -9,9 +9,9 @@ import java.net.SocketTimeoutException;
 
 public class ClientConnection {
 	private Socket clientSocket;
-	private final int PORT = 5291;
 
 	public void clientTcpConnetctin(String ip) {
+		int PORT = 5289;
 
 		try {
 			clientSocket = new Socket(ip, PORT);
@@ -25,6 +25,7 @@ public class ClientConnection {
 
 	public String clientUdpConnection() {
 		final String BOARDCAST_IP = "192.168.1.255";
+		final int PORT = 5291;
 
 		DatagramSocket udpSocket = null;
 		InetAddress boardCastIp = null;
