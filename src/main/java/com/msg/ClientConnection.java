@@ -46,7 +46,6 @@ public class ClientConnection {
 		DatagramPacket udpPacket = new DatagramPacket(sendMsg.getBytes(), sendMsg.length(), boardCastIp, PORT);
 
 		try {
-
 			udpSocket.send(udpPacket);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -59,7 +58,6 @@ public class ClientConnection {
 		try {
 			System.out.println("Getting Ip of other Pc");
 			udpSocket.receive(udpResponse);
-			udpSocket.send(udpPacket);
 			return udpSocket.getInetAddress().getHostAddress();
 
 		} catch (SocketTimeoutException t) {
