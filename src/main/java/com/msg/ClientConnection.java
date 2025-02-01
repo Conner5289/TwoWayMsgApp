@@ -6,13 +6,12 @@ import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.net.SocketTimeoutException;
-import java.util.Scanner;
 
 public class ClientConnection {
 	private Socket clientSocket;
+	private final int PORT = 5291;
 
 	public void clientTcpConnetctin(String ip) {
-		final int PORT = 5290;
 
 		try {
 			clientSocket = new Socket(ip, PORT);
@@ -26,7 +25,7 @@ public class ClientConnection {
 
 	public String clientUdpConnection() {
 		final String BOARDCAST_IP = "192.168.1.255";
-		final int PORT = 5291;
+		final int PORT = 5290;
 
 		DatagramSocket udpSocket = null;
 		InetAddress boardCastIp = null;
@@ -37,6 +36,7 @@ public class ClientConnection {
 			udpSocket = new DatagramSocket();
 			boardCastIp = InetAddress.getByName(BOARDCAST_IP);
 			udpSocket.setBroadcast(true);
+			udpSocket.setSoTimeout(1000); // Timeout of 5 seconds
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -60,7 +60,6 @@ public class ClientConnection {
 		try {
 			System.out.println("Getting Ip of other Pc");
 			udpSocket.receive(udpResponse);
-			udpSocket.setSoTimeout(5000); // Timeout of 5 seconds
 			return udpSocket.getInetAddress().getHostAddress();
 
 		} catch (SocketTimeoutException t) {

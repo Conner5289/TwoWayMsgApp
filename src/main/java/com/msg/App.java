@@ -8,7 +8,7 @@ public class App {
 		String remoteIp = client.clientUdpConnection(); // sees if there is a server, if non returns null
 
 		if (remoteIp == null) {
-			System.out.println(server.updConnection()); // Makes a server
+			System.out.println(server.updConnection()); // Makes a server, returns remoteIp with connection
 		}
 
 	}
