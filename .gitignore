@@ -1,7 +1,7 @@
 
 # Ignore all dotfiles
 .*
-src/traget
+/target
 
 # Don't ignore
 !.gitignore
