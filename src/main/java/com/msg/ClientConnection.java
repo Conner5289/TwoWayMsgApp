@@ -25,7 +25,6 @@ public class ClientConnection {
 
 	public String clientUdpConnection() {
 		final String BOARDCAST_IP = "192.168.1.255";
-		final int PORT = 5290;
 
 		DatagramSocket udpSocket = null;
 		InetAddress boardCastIp = null;
