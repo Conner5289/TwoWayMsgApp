@@ -59,6 +59,7 @@ public class ClientConnection {
 		try {
 			System.out.println("Getting Ip of other Pc");
 			udpSocket.receive(udpResponse);
+			udpSocket.send(udpPacket);
 			return udpSocket.getInetAddress().getHostAddress();
 
 		} catch (SocketTimeoutException t) {
