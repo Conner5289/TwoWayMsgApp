@@ -2,10 +2,10 @@ package com.msg;
 
 public class App {
 	public static void main(String[] args) {
-		ServerConnection server = new ServerConnection();
+
 		ClientConnection client = new ClientConnection();
 
-		server.run();
+		System.out.println(client.clientUdpConnection());
 
 	}
 }
