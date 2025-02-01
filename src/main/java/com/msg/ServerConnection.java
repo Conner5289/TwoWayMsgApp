@@ -6,8 +6,6 @@ import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.ServerSocket;
 
-import sun.util.logging.resources.logging;
-
 public class ServerConnection {
 	private ServerSocket serverConnetion;
 
