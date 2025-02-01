@@ -35,7 +35,7 @@ public class ClientConnection {
 			udpSocket = new DatagramSocket();
 			boardCastIp = InetAddress.getByName(BOARDCAST_IP);
 			udpSocket.setBroadcast(true);
-			udpSocket.setSoTimeout(1000); // Timeout of 5 seconds
+			udpSocket.setSoTimeout(3000); // Timeout of 5 seconds
 
 		} catch (Exception e) {
 			e.printStackTrace();

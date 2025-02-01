@@ -51,6 +51,7 @@ public class ServerConnection {
 
 			try {
 				udpSocket.send(udpSendPacket);
+				System.out.println("Sent ip back to 2nd pc");
 			} catch (Exception e) {
 				e.printStackTrace();
 				System.out.println("Bad udpPacket send");

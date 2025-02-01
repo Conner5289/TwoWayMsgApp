@@ -16,10 +16,12 @@ public class App {
 			server.tcpConnection();
 		}
 
+		System.out.println(remoteIp);
+
 		// Tcp conntections, where the real meassing take place
 
-		server.tcpConnection();
-		client.clientTcpConnetctin(remoteIp);
+		// server.tcpConnection();
+		// client.clientTcpConnetctin(remoteIp);
 
 	}
 
