@@ -1,3 +1,8 @@
 
-
+# Ignore all dotfiles
+.*
 src/traget
+
+# Don't ignore
+!.gitignore
+
