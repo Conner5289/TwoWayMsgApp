@@ -3,21 +3,26 @@ package com.msg;
 import java.io.IOException;
 import java.net.ServerSocket;
 
-public class ServerConnection {
-	private ServerSocket newSocket;
+public class ServerConnection implements Runnable {
+	private ServerSocket serverConnetion;
 
-	public ServerConnection() {
-
+	public void run() {
 		IpAdderss ipAdd = new IpAdderss();
+		final int PORT = 5289;
 
 		try {
-			newSocket = new ServerSocket(5289);
-			System.out.println("Socket open on \n" + "Ip:" + ipAdd.getLocalIp() + "\nPort: 500");
+			serverConnetion = new ServerSocket(PORT);
+			System.out.println("Server open on \n" + "Ip:" + ipAdd.getLocalIp() + "\nPort: " + PORT);
+
+			System.out.println("Waiting for other PC");
+			serverConnetion.accept();
 
 		} catch (IOException e) {
 			e.printStackTrace();
 			System.err.println("Bad Socket open");
 			System.exit(1);
 		}
+
 	}
+
 }
