@@ -57,9 +57,11 @@ public class ClientConnection {
 		DatagramPacket udpResponse = new DatagramPacket(buffer, buffer.length);
 
 		try {
+
 			System.out.println("Getting Ip of other Pc");
 			udpSocket.receive(udpResponse);
 			String remoteIp = udpResponse.getAddress().getHostAddress();
+			System.out.println(remoteIp + "This is the remoteIp for client class");
 			return remoteIp;
 
 		} catch (SocketTimeoutException t) {
