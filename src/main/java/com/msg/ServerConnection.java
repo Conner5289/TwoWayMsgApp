@@ -12,7 +12,7 @@ public class ServerConnection {
 	public void tcpConnection(int port) {
 		IpAdderss ipAdd = new IpAdderss();
 		try {
-			serverConnetion = new ServerSocket();
+			serverConnetion = new ServerSocket(port);
 			System.out.println("Server open on \n" + "Ip:" + ipAdd.getLocalIp() + "\nPort: " + port);
 
 			System.out.println("Waiting for other PC");

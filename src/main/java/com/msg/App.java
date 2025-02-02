@@ -16,12 +16,13 @@ public class App {
 
 			serverPort = 5288;
 			clientPort = 5289;
-
 		}
 
-		server.tcpConnection(serverPort);
-		client.clientTcpConnetctin(remoteIp, clientPort);
+		ClientRun clientThread = new ClientRun(clientPort, remoteIp);
+		ServerRun serverThread = new ServerRun(serverPort);
 
+		clientThread.run();
+		serverThread.run();
 	}
 
 }

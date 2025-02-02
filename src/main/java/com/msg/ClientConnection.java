@@ -53,7 +53,6 @@ public class ClientConnection {
 
 		byte[] buffer = new byte[1024];
 		DatagramPacket udpResponse = new DatagramPacket(buffer, buffer.length);
-		String responseIp = udpResponse.toString();
 
 		try {
 			udpSocket.receive(udpResponse);
