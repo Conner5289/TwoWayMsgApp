@@ -33,7 +33,7 @@ public class ClientConnection {
 		IpAdderss loaclIp = new IpAdderss();
 
 		try {
-			udpSocket = new DatagramSocket();
+			udpSocket = new DatagramSocket(UdpPort);
 			boardCastIp = InetAddress.getByName(BOARDCAST_IP);
 			udpSocket.setBroadcast(true);
 			udpSocket.setSoTimeout(3000); // Timeout of 5 seconds
@@ -60,14 +60,13 @@ public class ClientConnection {
 
 			System.out.println("Getting Ip of other Pc");
 			udpSocket.receive(udpResponse);
-			System.out.println("got by the recive block in clinet class");
+			System.out.println("got pass the recive block in clinet class");
 			String remoteIp = udpResponse.getAddress().getHostAddress();
 			System.out.println(remoteIp + "This is the remoteIp for client class");
 			return remoteIp;
 
 		} catch (SocketTimeoutException t) {
 			System.out.println("No server on online, making server");
-
 			return null;
 
 		} catch (IOException e) {

@@ -29,28 +29,27 @@ public class ServerConnection {
 	}
 
 	public String updConnection() {
-
 		IpAdderss loaclIp = new IpAdderss();
 		DatagramSocket udpSocket = null;
 		byte[] buffer = new byte[1024];
-		final int PORT = 5291;
+		final int UdpPort = 5291;
 
 		try {
-			udpSocket = new DatagramSocket(5291);
+			udpSocket = new DatagramSocket(UdpPort);
 
 			System.out.println("Waiting for connection");
 			DatagramPacket udpPacket = new DatagramPacket(buffer, buffer.length);
 
 			udpSocket.receive(udpPacket);
 			InetAddress remoteIp = udpPacket.getAddress();
-			System.out.println(remoteIp + " remopteIp in server class");
+			System.out.println(remoteIp.getHostAddress() + " remopteIp in server class");
 
 			System.out.println("Connection made");
 
 			String sendMsg = loaclIp.getLocalIp();
 			System.out.println(sendMsg + " SendMsg of server ");
 			DatagramPacket udpSendPacket = new DatagramPacket(sendMsg.getBytes(), sendMsg.length(), remoteIp,
-					PORT);
+					UdpPort);
 
 			try {
 				udpSocket.send(udpSendPacket);
