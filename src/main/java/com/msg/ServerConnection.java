@@ -30,7 +30,7 @@ public class ServerConnection {
 			String messageFromClient;
 			while ((messageFromClient = input.readLine()) != null) {
 				System.out.println("Received from client: " + messageFromClient);
-				output.println("Server says: " + messageFromClient);
+				output.println(ipAdd.getLocalIp() + " :" + messageFromClient);
 			}
 
 		} catch (IOException e) {

@@ -15,6 +15,8 @@ public class ClientConnection {
 
 	public void clientTcpConnetctin(String ip, int port) {
 
+		IpAdderss loaclIp = new IpAdderss();
+
 		System.out.println("This is the ip and port that the client class is getting " + ip + " " + port);
 		try {
 
@@ -30,7 +32,7 @@ public class ClientConnection {
 			String message;
 			while ((message = input.readLine()) != null) {
 				output.println(message); // Send message to the server
-				System.out.println("Server says: " + serverInput.readLine()); // Read server's response
+				System.out.println(loaclIp.getLocalIp() + ": " + serverInput.readLine()); // Read server's response
 			}
 
 		} catch (IOException e) {
