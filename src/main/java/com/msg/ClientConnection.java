@@ -11,7 +11,7 @@ import java.net.Socket;
 import java.net.SocketTimeoutException;
 
 public class ClientConnection {
-	private Socket serverSocket;
+	private Socket clientSocket;
 
 	public void clientTcpConnetctin(String ip, int port) {
 
@@ -20,19 +20,16 @@ public class ClientConnection {
 		System.out.println("This is the ip and port that the client class is getting " + ip + " " + port);
 		try {
 
-			serverSocket = new Socket(ip, port);
+			clientSocket = new Socket(ip, port);
 			System.out.println("Client Socket connection");
 
 			BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
-			BufferedReader serverInput = new BufferedReader(new InputStreamReader(serverSocket.getInputStream())); // Server
-																													// response
-			PrintWriter output = new PrintWriter(serverSocket.getOutputStream(), true);
+			PrintWriter output = new PrintWriter(clientSocket.getOutputStream(), true);
 
 			// Send messages to the server
 			String message;
 			while ((message = input.readLine()) != null) {
 				output.println(message); // Send message to the server
-				System.out.println(loaclIp.getLocalIp() + ": " + serverInput.readLine()); // Read server's response
 			}
 
 		} catch (IOException e) {
