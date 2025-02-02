@@ -13,7 +13,7 @@ import java.net.Socket;
 public class ServerConnection {
 	private ServerSocket serverConnetion;
 
-	public void tcpConnection(int port) {
+	public void tcpConnection(int port, String ip) {
 		IpAdderss ipAdd = new IpAdderss();
 		try {
 			serverConnetion = new ServerSocket(port);
@@ -29,7 +29,7 @@ public class ServerConnection {
 			// Read and send messages in a loop
 			String messageFromClient;
 			while ((messageFromClient = input.readLine()) != null) {
-				System.out.println(ipAdd.getLocalIp() + ": " + messageFromClient);
+				System.out.println(ip + ": " + messageFromClient);
 			}
 
 		} catch (IOException e) {
