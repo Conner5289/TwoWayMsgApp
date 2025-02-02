@@ -16,10 +16,21 @@ public class IpAdderss {
 
 		} catch (UnknownHostException e) {
 			e.printStackTrace();
-			System.exit(1);
 		}
 
 		return localIp;
+	}
+
+	public InetAddress getLocalInet() {
+		InetAddress localHost = null;
+
+		try {
+			localHost = InetAddress.getLocalHost();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return localHost;
+
 	}
 
 }

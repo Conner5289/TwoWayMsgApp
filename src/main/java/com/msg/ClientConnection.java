@@ -24,8 +24,8 @@ public class ClientConnection {
 	}
 
 	public String clientUdpConnection() {
-		final String BOARDCAST_IP = "192.168.1.255";
-		final int UdpPort = 5291;
+		final String BOARDCAST_IP = "255.255.255.255";
+		final int UdpPort = 5292;
 
 		DatagramSocket udpSocket = null;
 		InetAddress boardCastIp = null;
@@ -33,7 +33,7 @@ public class ClientConnection {
 		IpAdderss loaclIp = new IpAdderss();
 
 		try {
-			udpSocket = new DatagramSocket(UdpPort);
+			udpSocket = new DatagramSocket(UdpPort, loaclIp.getLocalInet());
 			boardCastIp = InetAddress.getByName(BOARDCAST_IP);
 			udpSocket.setBroadcast(true);
 			udpSocket.setSoTimeout(3000); // Timeout of 5 seconds
@@ -44,7 +44,7 @@ public class ClientConnection {
 		}
 
 		String sendMsg = loaclIp.getLocalIp();
-		DatagramPacket udpPacket = new DatagramPacket(sendMsg.getBytes(), sendMsg.length(), boardCastIp, UdpPort);
+		DatagramPacket udpPacket = new DatagramPacket(sendMsg.getBytes(), sendMsg.length(), boardCastIp, UdpPort - 1);
 
 		try {
 			udpSocket.send(udpPacket);
@@ -55,12 +55,11 @@ public class ClientConnection {
 
 		byte[] buffer = new byte[1024];
 		DatagramPacket udpResponse = new DatagramPacket(buffer, buffer.length);
+		String responseIp = udpResponse.toString();
 
 		try {
-
 			System.out.println("Getting Ip of other Pc");
 			udpSocket.receive(udpResponse);
-			System.out.println("got pass the recive block in clinet class");
 			String remoteIp = udpResponse.getAddress().getHostAddress();
 			System.out.println(remoteIp + "This is the remoteIp for client class");
 			return remoteIp;

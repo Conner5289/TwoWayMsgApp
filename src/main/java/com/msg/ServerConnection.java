@@ -49,7 +49,7 @@ public class ServerConnection {
 			String sendMsg = loaclIp.getLocalIp();
 			System.out.println(sendMsg + " SendMsg of server ");
 			DatagramPacket udpSendPacket = new DatagramPacket(sendMsg.getBytes(), sendMsg.length(), remoteIp,
-					UdpPort);
+					UdpPort + 1);
 
 			try {
 				udpSocket.send(udpSendPacket);
