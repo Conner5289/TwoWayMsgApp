@@ -1,6 +1,9 @@
 package com.msg;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
@@ -8,12 +11,23 @@ import java.net.Socket;
 import java.net.SocketTimeoutException;
 
 public class ClientConnection {
-	private Socket clientSocket;
+	private Socket serverSocket;
 
 	public void clientTcpConnetctin(String ip, int port) {
 		try {
-			clientSocket = new Socket(ip, port);
-			System.out.println("Client Socket connection on \nIp: " + ip + "\nPort: " + port);
+			serverSocket = new Socket(ip, port);
+			System.out.println("Client Socket connection");
+			BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
+			BufferedReader serverInput = new BufferedReader(new InputStreamReader(serverSocket.getInputStream())); // Server
+																													// response
+			PrintWriter output = new PrintWriter(serverSocket.getOutputStream(), true);
+
+			// Send messages to the server
+			String message;
+			while ((message = input.readLine()) != null) {
+				output.println(message); // Send message to the server
+				System.out.println("Server says: " + serverInput.readLine()); // Read server's response
+			}
 
 		} catch (IOException e) {
 			e.printStackTrace();

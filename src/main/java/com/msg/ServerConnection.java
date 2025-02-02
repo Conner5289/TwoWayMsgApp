@@ -1,10 +1,14 @@
 package com.msg;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.ServerSocket;
+import java.net.Socket;
 
 public class ServerConnection {
 	private ServerSocket serverConnetion;
@@ -16,7 +20,18 @@ public class ServerConnection {
 			System.out.println("Server open on \n" + "Ip:" + ipAdd.getLocalIp() + "\nPort: " + port);
 
 			System.out.println("Waiting for other PC");
-			serverConnetion.accept();
+			Socket clientSocket = serverConnetion.accept();
+			System.out.println("Pc connected");
+
+			BufferedReader input = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+			PrintWriter output = new PrintWriter(clientSocket.getOutputStream(), true);
+
+			// Read and send messages in a loop
+			String messageFromClient;
+			while ((messageFromClient = input.readLine()) != null) {
+				System.out.println("Received from client: " + messageFromClient);
+				output.println("Server says: " + messageFromClient);
+			}
 
 		} catch (IOException e) {
 			e.printStackTrace();
