@@ -68,6 +68,7 @@ public class ServerConnection {
 			}
 
 			String remoteAddress = remoteIp.getHostAddress();
+			udpSocket.close();
 			return remoteAddress;
 
 		} catch (Exception e) {

@@ -16,11 +16,15 @@ public class App {
 			serverPort = 5289;
 		}
 
-		ClientRun tcpClient = new ClientRun(clientPort, remoteIp);
 		ServerRun tcpServer = new ServerRun(serverPort);
+		ClientRun tcpClient = new ClientRun(clientPort, remoteIp);
 
-		tcpClient.run();
-		tcpServer.run();
+		Thread threadServer = new Thread(tcpServer);
+		Thread threadClient = new Thread(tcpClient);
+
+		threadServer.start();
+		threadClient.start();
+
 	}
 
 }

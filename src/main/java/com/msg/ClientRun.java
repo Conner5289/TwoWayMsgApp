@@ -11,6 +11,7 @@ public class ClientRun implements Runnable {
 
 	}
 
+	@Override
 	public void run() {
 		ClientConnection client = new ClientConnection();
 		client.clientTcpConnetctin(ip, port);

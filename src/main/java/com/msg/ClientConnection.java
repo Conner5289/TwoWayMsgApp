@@ -14,9 +14,13 @@ public class ClientConnection {
 	private Socket serverSocket;
 
 	public void clientTcpConnetctin(String ip, int port) {
+
+		System.out.println("This is the ip and port that the client class is getting " + ip + " " + port);
 		try {
+
 			serverSocket = new Socket(ip, port);
 			System.out.println("Client Socket connection");
+
 			BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
 			BufferedReader serverInput = new BufferedReader(new InputStreamReader(serverSocket.getInputStream())); // Server
 																													// response
@@ -71,6 +75,7 @@ public class ClientConnection {
 		try {
 			udpSocket.receive(udpResponse);
 			String remoteIp = udpResponse.getAddress().getHostAddress();
+			udpSocket.close();
 			return remoteIp;
 
 		} catch (SocketTimeoutException t) {
