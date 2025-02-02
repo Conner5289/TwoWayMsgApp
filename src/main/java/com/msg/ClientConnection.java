@@ -10,12 +10,10 @@ import java.net.SocketTimeoutException;
 public class ClientConnection {
 	private Socket clientSocket;
 
-	public void clientTcpConnetctin(String ip) {
-		int TcpPort = 5289;
-
+	public void clientTcpConnetctin(String ip, int port) {
 		try {
-			clientSocket = new Socket(ip, TcpPort);
-			System.out.println("Client Socket connection on \nIp: " + ip + "\nPort: " + TcpPort);
+			clientSocket = new Socket(ip, port);
+			System.out.println("Client Socket connection on \nIp: " + ip + "\nPort: " + port);
 
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -58,10 +56,8 @@ public class ClientConnection {
 		String responseIp = udpResponse.toString();
 
 		try {
-			System.out.println("Getting Ip of other Pc");
 			udpSocket.receive(udpResponse);
 			String remoteIp = udpResponse.getAddress().getHostAddress();
-			System.out.println(remoteIp + "This is the remoteIp for client class");
 			return remoteIp;
 
 		} catch (SocketTimeoutException t) {

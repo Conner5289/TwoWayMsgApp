@@ -5,21 +5,22 @@ public class App {
 		ClientConnection client = new ClientConnection();
 		ServerConnection server = new ServerConnection();
 
+		int serverPort = 5289;
+		int clientPort = 5288;
+
 		// udp conntecion to find Ip
 		String remoteIp = client.clientUdpConnection(); // sees if there is a server, if non returns null
-		System.out.println(remoteIp + "retrun to main for client");
 
 		if (remoteIp == null) {
 			remoteIp = server.updConnection(); // Makes a server, returns remoteIp with connection
-			server.tcpConnection();
+
+			serverPort = 5288;
+			clientPort = 5289;
+
 		}
 
-		System.out.println(remoteIp);
-
-		// Tcp conntections, where the real meassing take place
-
-		// server.tcpConnection();
-		// client.clientTcpConnetctin(remoteIp);
+		server.tcpConnection(serverPort);
+		client.clientTcpConnetctin(remoteIp, clientPort);
 
 	}
 

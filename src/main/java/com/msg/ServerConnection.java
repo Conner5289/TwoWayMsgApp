@@ -9,13 +9,11 @@ import java.net.ServerSocket;
 public class ServerConnection {
 	private ServerSocket serverConnetion;
 
-	public void tcpConnection() {
+	public void tcpConnection(int port) {
 		IpAdderss ipAdd = new IpAdderss();
-		final int PORT = 5289;
-
 		try {
-			serverConnetion = new ServerSocket(PORT);
-			System.out.println("Server open on \n" + "Ip:" + ipAdd.getLocalIp() + "\nPort: " + PORT);
+			serverConnetion = new ServerSocket();
+			System.out.println("Server open on \n" + "Ip:" + ipAdd.getLocalIp() + "\nPort: " + port);
 
 			System.out.println("Waiting for other PC");
 			serverConnetion.accept();
@@ -42,18 +40,13 @@ public class ServerConnection {
 
 			udpSocket.receive(udpPacket);
 			InetAddress remoteIp = udpPacket.getAddress();
-			System.out.println(remoteIp.getHostAddress() + " remopteIp in server class");
-
-			System.out.println("Connection made");
 
 			String sendMsg = loaclIp.getLocalIp();
-			System.out.println(sendMsg + " SendMsg of server ");
 			DatagramPacket udpSendPacket = new DatagramPacket(sendMsg.getBytes(), sendMsg.length(), remoteIp,
 					UdpPort + 1);
 
 			try {
 				udpSocket.send(udpSendPacket);
-				System.out.println("Sent ip back to 2nd pc");
 			} catch (Exception e) {
 				e.printStackTrace();
 				System.out.println("Bad udpPacket send");
