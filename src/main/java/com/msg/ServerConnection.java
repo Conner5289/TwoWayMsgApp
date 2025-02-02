@@ -43,10 +43,12 @@ public class ServerConnection {
 
 			udpSocket.receive(udpPacket);
 			InetAddress remoteIp = udpPacket.getAddress();
+			System.out.println(remoteIp + " remopteIp in server class");
 
 			System.out.println("Connection made");
 
 			String sendMsg = loaclIp.getLocalIp();
+			System.out.println(sendMsg + " SendMsg of server ");
 			DatagramPacket udpSendPacket = new DatagramPacket(sendMsg.getBytes(), sendMsg.length(), remoteIp,
 					PORT);
 

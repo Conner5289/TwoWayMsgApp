@@ -11,11 +11,11 @@ public class ClientConnection {
 	private Socket clientSocket;
 
 	public void clientTcpConnetctin(String ip) {
-		int PORT = 5289;
+		int TcpPort = 5289;
 
 		try {
-			clientSocket = new Socket(ip, PORT);
-			System.out.println("Client Socket connection on \nIp: " + ip + "\nPort: " + PORT);
+			clientSocket = new Socket(ip, TcpPort);
+			System.out.println("Client Socket connection on \nIp: " + ip + "\nPort: " + TcpPort);
 
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -25,7 +25,7 @@ public class ClientConnection {
 
 	public String clientUdpConnection() {
 		final String BOARDCAST_IP = "192.168.1.255";
-		final int PORT = 5291;
+		final int UdpPort = 5291;
 
 		DatagramSocket udpSocket = null;
 		InetAddress boardCastIp = null;
@@ -44,7 +44,7 @@ public class ClientConnection {
 		}
 
 		String sendMsg = loaclIp.getLocalIp();
-		DatagramPacket udpPacket = new DatagramPacket(sendMsg.getBytes(), sendMsg.length(), boardCastIp, PORT);
+		DatagramPacket udpPacket = new DatagramPacket(sendMsg.getBytes(), sendMsg.length(), boardCastIp, UdpPort);
 
 		try {
 			udpSocket.send(udpPacket);
@@ -60,6 +60,7 @@ public class ClientConnection {
 
 			System.out.println("Getting Ip of other Pc");
 			udpSocket.receive(udpResponse);
+			System.out.println("got by the recive block in clinet class");
 			String remoteIp = udpResponse.getAddress().getHostAddress();
 			System.out.println(remoteIp + "This is the remoteIp for client class");
 			return remoteIp;
