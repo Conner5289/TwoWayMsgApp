@@ -2,27 +2,23 @@ package com.msg;
 
 public class App {
 	public static void main(String[] args) {
-		ClientConnection client = new ClientConnection();
-		ServerConnection server = new ServerConnection();
+		int port = 5289;
 
-		int serverPort = 5289;
-		int clientPort = 5288;
+		ClientConnection udpClient = new ClientConnection();
+		ServerConnection udpServer = new ServerConnection();
 
-		// udp conntecion to find Ip
-		String remoteIp = client.clientUdpConnection(); // sees if there is a server, if non returns null
+		ServerRun server = new ServerRun(port);
+
+		String remoteIp = udpClient.clientUdpConnection();
 
 		if (remoteIp == null) {
-			remoteIp = server.updConnection(); // Makes a server, returns remoteIp with connection
-
-			serverPort = 5288;
-			clientPort = 5289;
+			remoteIp = udpServer.updConnection();
+			server.run();
+		} else {
+			ClientRun clientRun = new ClientRun(port, remoteIp);
+			clientRun.run();
 		}
 
-		ClientRun clientThread = new ClientRun(clientPort, remoteIp);
-		ServerRun serverThread = new ServerRun(serverPort);
-
-		clientThread.run();
-		serverThread.run();
 	}
 
 }
