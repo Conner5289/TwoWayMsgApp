@@ -29,7 +29,7 @@ public class ServerConnection {
 			// Read and send messages in a loop
 			String messageFromClient;
 			while ((messageFromClient = input.readLine()) != null) {
-				System.out.println("Received from client: " + messageFromClient);
+				System.out.println(ipAdd.getLocalIp() + ": " + messageFromClient);
 			}
 
 		} catch (IOException e) {
