@@ -13,7 +13,7 @@ import java.net.Socket;
 public class ServerConnection {
 	private ServerSocket serverConnetion;
 
-	public void tcpConnection(int port, String ip) {
+	public void tcpServerConnection(int port, String ip) {
 		IpAdderss ipAdd = new IpAdderss();
 		try {
 			serverConnetion = new ServerSocket(port);
@@ -40,19 +40,19 @@ public class ServerConnection {
 
 	}
 
-	public String updConnection() {
+	public String updServerConnection() {
 		IpAdderss loaclIp = new IpAdderss();
-		DatagramSocket udpSocket = null;
+		DatagramSocket udpServerSocket = null;
 		byte[] buffer = new byte[1024];
 		final int UdpPort = 5291;
 
 		try {
-			udpSocket = new DatagramSocket(UdpPort);
+			udpServerSocket = new DatagramSocket(UdpPort);
 
 			System.out.println("Waiting for connection");
 			DatagramPacket udpPacket = new DatagramPacket(buffer, buffer.length);
 
-			udpSocket.receive(udpPacket);
+			udpServerSocket.receive(udpPacket);
 			InetAddress remoteIp = udpPacket.getAddress();
 
 			String sendMsg = loaclIp.getLocalIp();
@@ -60,15 +60,15 @@ public class ServerConnection {
 					UdpPort + 1);
 
 			try {
-				udpSocket.send(udpSendPacket);
+				udpServerSocket.send(udpSendPacket);
 			} catch (Exception e) {
 				e.printStackTrace();
 				System.out.println("Bad udpPacket send");
 			}
 
-			String remoteAddress = remoteIp.getHostAddress();
-			udpSocket.close();
-			return remoteAddress;
+			String remoteIpAddress = remoteIp.getHostAddress();
+			udpServerSocket.close();
+			return remoteIpAddress;
 
 		} catch (Exception e) {
 			e.printStackTrace();

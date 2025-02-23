@@ -11,7 +11,7 @@ public class App {
 		String remoteIp = udpClient.clientUdpConnection();
 
 		if (remoteIp == null) {
-			remoteIp = udpServer.updConnection();
+			remoteIp = udpServer.updServerConnection();
 			clientPort = 5290;
 			serverPort = 5289;
 		}

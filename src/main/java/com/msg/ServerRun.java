@@ -13,7 +13,7 @@ public class ServerRun implements Runnable {
 	@Override
 	public void run() {
 		ServerConnection server = new ServerConnection();
-		server.tcpConnection(port, ip);
+		server.tcpServerConnection(port, ip);
 
 	}
 
