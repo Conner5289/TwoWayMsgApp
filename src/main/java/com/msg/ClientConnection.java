@@ -39,8 +39,8 @@ public class ClientConnection {
 		}
 	}
 
-	// Made extact method
-	public void udpIpPortBoradCastMsg(int UdpPort, InetAddress boardCastIp, IpAdderss loaclIp,
+	// Extract method
+	public void udpIpPortBoradcastMsg(int UdpPort, InetAddress boardCastIp, IpAdderss loaclIp,
 			DatagramSocket udpSocket) {
 		String sendMsg = loaclIp.getLocalIp();
 		DatagramPacket udpPacket = new DatagramPacket(sendMsg.getBytes(), sendMsg.length(), boardCastIp, UdpPort - 1);
@@ -59,7 +59,6 @@ public class ClientConnection {
 
 		DatagramSocket udpSocket = null;
 		InetAddress boardCastIp = null;
-
 		IpAdderss loaclIp = new IpAdderss();
 
 		try {
@@ -73,7 +72,7 @@ public class ClientConnection {
 			System.out.println("Bad udp socket");
 		}
 
-		udpIpPortBoradCastMsg(UdpPort, boardCastIp, loaclIp, udpSocket);
+		udpIpPortBoradcastMsg(UdpPort, boardCastIp, loaclIp, udpSocket);
 
 		byte[] buffer = new byte[1024];
 		DatagramPacket udpResponse = new DatagramPacket(buffer, buffer.length);

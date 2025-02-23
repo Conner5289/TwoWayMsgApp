@@ -16,8 +16,8 @@ public class App {
 			serverPort = 5289;
 		}
 
-		ServerRun tcpServer = new ServerRun(serverPort, remoteIp);
-		ClientRun tcpClient = new ClientRun(clientPort, remoteIp);
+		ThreadConnection tcpServer = new ThreadConnection(serverPort, remoteIp, true);
+		ThreadConnection tcpClient = new ThreadConnection(clientPort, remoteIp, false);
 
 		Thread threadServer = new Thread(tcpServer);
 		Thread threadClient = new Thread(tcpClient);

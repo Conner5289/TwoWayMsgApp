@@ -13,7 +13,7 @@ import java.net.Socket;
 public class ServerConnection {
 	private ServerSocket serverConnetion;
 
-	public void tcpServerConnection(int port, String ip) {
+	public void tcpServerConnection(String ip, int port) {
 		IpAdderss ipAdd = new IpAdderss();
 		try {
 			serverConnetion = new ServerSocket(port);
