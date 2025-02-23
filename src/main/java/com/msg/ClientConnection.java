@@ -15,7 +15,8 @@ public class ClientConnection {
 
 	public void clientTcpConnetctin(String ip, int port) {
 
-		IpAdderss loaclIp = new IpAdderss();
+		// "deleted code"
+		// IpAdderss loaclIp = new IpAdderss();
 
 		System.out.println("This is the ip and port that the client class is getting " + ip + " " + port);
 		try {
